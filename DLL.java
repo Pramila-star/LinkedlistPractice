@@ -69,6 +69,59 @@ public class DLL {
         return val;
     }
 
+    public int deleteLast(){
+         if(head == null){
+            System.out.println("List is Emppty!");
+           return -1;
+        }
+        int val = tail.val;
+        tail = tail.prev;
+
+        if(head == null){
+            tail = null;
+        }else {
+            head.prev = null;
+        }
+        size--;
+        return val;
+    }
+
+    public int delete(int index){
+         if(head == null){
+            System.out.println("List is Emppty!");
+           return -1;
+         }
+        if(index == 0){
+            return deleteFirst();
+        }
+        if ( index == size -1){
+            return deleteLast();
+        }
+        Node temp = head;
+        for (int i = 0; i< index ; i++){
+            temp = temp.next;
+        }
+        int val = temp.val;
+        temp.next.prev = temp.prev;
+        temp.prev.next = temp.next;
+        size --;
+        return val;
+
+    }
+
+    public Node find(int val){
+        Node node = head;
+        while(node != null){
+           if( node.val == val){
+               return node;
+           }else {
+            node = node.next;
+
+           }
+        }
+        return null;
+    }
+
     public void display(){
         Node node = head;
         Node last  = null;
@@ -123,7 +176,12 @@ public class DLL {
          list.display();
          System.out.println("\nDeleted First: " + list.deleteFirst());
          list.display();
-
+         System.out.println("\nDeleted Last: " + list.deleteLast());
+         list.display();
+         System.out.println("\nDelete given index: " + list.delete(3));
+         list.display();
+         list.find(3);
+         list.display();
 
     }
     
